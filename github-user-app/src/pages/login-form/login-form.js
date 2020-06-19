@@ -16,20 +16,24 @@ class LoginForm extends React.Component {
     this.getUserData();
   };
 
-  // to fetch data I had to use api and not developer.github
+  // to fetch data I had to use api.github.com/users/ and not developer.github/v3/users which was
+  // just the documentation
 
   // since component would have been unmounted before I can get data from the state I add the data as
   // additional property on location in order to pass the userData to the UserDetails Page
+
+  // In many cases fetch goes into ComponentDidMount but since I´m fetching after the user entered a
+  // username the fetch happens later
 
   async getUserData() {
     const url = `https://api.github.com/users/${this.state.username}`;
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     this.setState({ userData: data });
+
     this.props.history.push({
-      pathname: `/results/${data.login}`,
-      data: data,
+      pathname: `/results/${data.login}`, // Target page
+      data: data, // passing data along
     });
   }
 
