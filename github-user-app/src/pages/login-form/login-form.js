@@ -1,6 +1,8 @@
 import React from "react";
 import "./login-form.scss";
 
+import logo from "../../images/logo.svg";
+
 class LoginForm extends React.Component {
   state = {
     username: "",
@@ -26,33 +28,48 @@ class LoginForm extends React.Component {
   // username the fetch happens later
 
   async getUserData() {
-    const url = `https://api.github.com/users/${this.state.username}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    this.setState({ userData: data });
+    try {
+      const url = `https://api.github.com/users/${this.state.username}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      this.setState({ userData: data });
 
-    this.props.history.push({
-      pathname: `/results/${data.login}`, // Target page
-      data: data, // passing data along
-    });
+      // Pushing to props.location via history.push
+      this.props.history.push({
+        pathname: `/results/${data.login}`, // Target page
+        data: data, // passing data along
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   render() {
-    console.log(this.state.username);
-
     return (
       <main>
-        <h1>Welcome to GitHub User Info</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            value={this.state.username}
-            onChange={this.onChangeHandler}
-            placeholder="Please enter GitHub username"
-            required
-          />
-          <input type="submit" value="Submit" />
-        </form>
+        <div className="search-card">
+          <div className="search-card-header">
+            <img src={logo} alt="github-icon" />
+            <h1>GitHub User Search</h1>
+          </div>
+          <form className="search-card-form" onSubmit={this.handleSubmit}>
+            <input
+              className="search-card-form-input"
+              type="text"
+              value={this.state.username}
+              onChange={this.onChangeHandler}
+              placeholder="Please enter GitHub username"
+              required
+            />
+            <button
+              className="search-card-form-button"
+              type="submit"
+              value="Submit"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </main>
     );
   }

@@ -1,68 +1,79 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## My steps throughout the project
 
-## Available Scripts
+1. Install create react app
+2. Install react-browser-dom
+3. Install node-sass
+4. Set up folder structure with pages folder and create component pages for login-page and user-details-page
+5. Add React Router Elements to App.js and link components inside the Route Element
+6.
 
-In the project directory, you can run:
+- Create Login-Form class component
+- get username with onChangeHandler and add it to the state
+- login-form: fetch userdata in getUserData function and pass data to user-details component via route. Username on route is a variable (:username)  
+  holy grail to fix this issue found here: https://stackoverflow.com/questions/52238637/react-router-how-to-pass-data-between-pages-in-react
 
-### `npm start`
+7. user-details: Fetch data via match.params.user (which is the variable from the route in App.js) and set it to the state.  
+   To have to data available on page load with the url function has to be inside ComponentDidMount.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+8. Add JSX to render in user-details component
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+9. Style login-form component and user-details component with SCSS using nested elements
 
-### `npm test`
+10. Add responsive design to components
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+11. Add error handling to getUserData function in both components
 
-### `npm run build`
+### Biggest Challenges and Gotchas
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### For Login-Form
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+to fetch data I had to use api.github.com/users/:user and not developer.github/v3/users/ which was
+just the documentation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+In many cases fetch goes into ComponentDidMount but since I´m fetching after the user entered a username the fetch happens later. Therefore I created a function called getUserData.
 
-### `npm run eject`
+Since the login-form component unmounts on submit I couldn´t get the data from the state in time. I added the data as an additional property on the location by using "this.props.history.push" in order to pass the userData to the UserDetails Page via the Route in App.js
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### For User Details
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Since I fetch the user with the form in the login-form component I don´t have the user available when
+I type it into the url directly. Therefore I need to fetch the user here again by accessing the username directly in the URL by using this.props.match.params.user. The fetched value I pass to the state.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Homeday Coding Challenge: Github user fetching
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Instructions
 
-## Learn More
+### Create an app that allows users to search for a Github user and see some information about them. It should consist of two views:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### The form view:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The user should be able to type a username.
+The input should have validation (No empty values allowed).
+The user should be able to submit the form.
 
-### Code Splitting
+#### The results view:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+It should show some information about the searched user (image, first name and last name as a minimum).
 
-### Analyzing the Bundle Size
+### Bonus
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+The route of the results page contains the username which allows the user to access the results page directly if they have the username (e.g. /results/homeday-de)
+Semantic HTML is used
+Error handling
 
-### Making a Progressive Web App
+### Additional info
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+To fetch a Github user you can use this endpoint: https://developer.github.com/v3/users/#get-a-single-user
 
-### Advanced Configuration
+### General guidelines
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Use any framework, library or API you like
+The code should be readable and clearly commented when needed
+The project should be pushed to a public github repository
+README.md should contain project documentation (how to run and build the project locally from scratch, project structure, gotchas,... anything worth mentioning)
+The UI should be responsive
 
-### Deployment
+### Evaluation Criteria
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+UX / UI: Does the app look and feel good?
+Code Quality: Is the code clean, consistent, well-structured and easy to understand?
