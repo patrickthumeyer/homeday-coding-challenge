@@ -1,13 +1,9 @@
-html {
+* {
   box-sizing: border-box;
-}
-
-.header {
-  margin-left: 30px;
+  margin: 0;
 }
 
 .card {
-  margin: 30px;
   background-image: linear-gradient(#dadada, #f3f3f3);
   box-shadow: 7px 7px 6px rgb(197, 197, 197);
   border-radius: 15px;
@@ -24,35 +20,39 @@ html {
     }
   }
   &-user-info {
-    margin-left: 20px;
     width: 100%;
-    margin-right: 15px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     &-username {
       font-size: 28px;
+      margin-top: 0px;
     }
     &-follow {
       display: flex;
-      &-followers {
-        padding: 5px 15px 5px 0px;
-        border-right: 2px solid rgb(32, 32, 32);
-      }
-      &-following {
-        padding: 5px 15px;
+      align-items: center;
+      width: 240px;
+      justify-content: space-between;
+      &-seperator {
+        width: 2px;
+        background-color: black;
+        height: 20px;
       }
     }
     &-repo-button-wrapper {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 15px;
+
       &-button {
         border-radius: 5px;
-        padding: 10px 15px;
         cursor: pointer;
         transition: 0.3s;
         background-color: black;
+        height: 40px;
+        width: 150px;
+        align-self: flex-end;
       }
       &-button:hover {
         background-color: rgb(32, 32, 32);
@@ -82,15 +82,21 @@ html {
       }
     }
     &-user-info {
-      margin: 0;
-      padding: 20px;
-      width: 260px;
-    }
-    &-user-info-repo-button-wrapper {
-      flex-direction: column;
-      margin-bottom: 0;
-      &-button {
-        margin-right: 0;
+      width: 100%;
+      text-align: center;
+      min-height: 330px;
+
+      &-follow {
+        display: flex;
+        width: 260px;
+        justify-content: space-evenly;
+      }
+      &-repo-button-wrapper {
+        display: flex;
+        flex-direction: column;
+        &-button {
+          align-self: center;
+        }
       }
     }
   }

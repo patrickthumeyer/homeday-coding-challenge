@@ -35,35 +35,35 @@ class UserDetails extends React.Component {
             />
           </div>
           <div className="card-user-info">
-            <div>
-              <h2 className="card-user-info-username">
-                {this.state.userData.login}
-              </h2>
-              {this.state.userData.bio && <p>{this.state.userData.bio}</p>}
-              {this.state.userData.location && (
-                <p>Location: {this.state.userData.location}</p>
-              )}
-              <div className="card-user-info-follow">
-                <p className="card-user-info-follow-followers">
-                  Followers: {this.state.userData.followers}
-                </p>
-                <p className="card-user-info-follow-following">
-                  Following: {this.state.userData.following}
-                </p>
-              </div>
+            <h2 className="card-user-info-username">
+              {this.state.userData.login}
+            </h2>
+            {this.state.userData.bio && (
+              <p className="card-user-info-bio">{this.state.userData.bio}</p>
+            )}
+            {this.state.userData.location && (
+              <p>Location: {this.state.userData.location}</p>
+            )}
+            <div className="card-user-info-follow">
+              <p className="card-user-info-follow-followers">
+                Followers: {this.state.userData.followers}
+              </p>
+              <div className="card-user-info-follow-seperator"></div>
+              <p className="card-user-info-follow-following">
+                Following: {this.state.userData.following}
+              </p>
             </div>
-            <div className="card-user-info-repo-button-wrapper">
-              <p>Public Repos: {this.state.userData.public_repos}</p>
-              <button className="card-user-info-repo-button-wrapper-button">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={this.state.userData.html_url}
-                >
-                  GitHub profile
-                </a>
-              </button>
-            </div>
+
+            <p>Public Repos: {this.state.userData.public_repos}</p>
+            <button className="card-user-info-repo-button-wrapper-button">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={this.state.userData.html_url}
+              >
+                GitHub profile
+              </a>
+            </button>
           </div>
         </section>
       </>
